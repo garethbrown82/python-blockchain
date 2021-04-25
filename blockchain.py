@@ -1,12 +1,12 @@
 import hashlib
 import json
+import sys
 from time import time
 from uuid import uuid4
 from hashlib import sha256
-
 from flask import Flask, jsonify, request
-
 from urllib.parse import urlparse
+import requests
 
 class Blockchain(object):
   def __init__(self):
@@ -273,5 +273,10 @@ def consensus():
 
   return jsonify(response), 200
 
+if (len(sys.argv) > 1):
+  port = sys.argv[1]
+else:
+  port = 5000
+
 if __name__ == '__main__':
-  app.run(host='127.0.0.1', port=5000)
+  app.run(host='127.0.0.1', port=port)
